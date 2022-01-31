@@ -10,7 +10,18 @@
                 </div>
 
                 <div class="card-body">
-                   
+                   <h2>What's next?</h2>
+                   <ul>
+                       <li>
+                           <a href="#">Lorem ipsum dolor</a>
+                        </li>
+                         <li>
+                           <a href="#">Lorem ipsum dolor</a>
+                        </li>
+                         <li>
+                           <a href="#">Lorem ipsum dolor</a>
+                        </li>
+                   </ul>
 
                 </div>
             </div>
