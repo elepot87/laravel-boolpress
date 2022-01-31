@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">
+        Sono la pagina home di front-office
+    </div>
 
     {{-- Script per Front-office --}}
     <script src="{{ asset('js/front-office.js') }}"></script>
