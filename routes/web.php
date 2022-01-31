@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home Frontend
-Route::get('/', function () {
-    return view('guests.home');
-});
-
 // Rotte per autenticazione
 Auth::routes();
 
 // Rotte per area admin
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
 Route::middleware('auth')
     ->namespace('Admin')
     ->name('admin.')
@@ -33,3 +25,9 @@ Route::middleware('auth')
         // Admin Homepage 
         Route::get('/', 'HomeController@index')->name('home');
     });
+
+
+// Home Frontend
+Route::get('{any?}', function () {
+    return view('guests.home');
+})->where('any', '.*');
