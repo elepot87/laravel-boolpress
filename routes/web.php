@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 // Home Frontend
 Route::get('/', function () {
-    return view('welcome');
+    return view('guests.home');
 });
 
 // Rotte per autenticazione
 Auth::routes();
 
 // Rotte per area admin
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')
