@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +38,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // VALIDAZIONE
+        // 1 parametro: set regole di validazione
+        // 2 parametro: customizzare messaggio di errore (se si vuole)
+        $request->validate(
+            [
+            'title' => 'required|max:255',
+            'content' => 'required',
+            ], 
+            [
+            'required' => 'Remember to write the :attribute',
+            'max' => 'Max :max characters allowed for the :attribute',
+            ]
+        );
+        
+        $data = $request->all();
+        dump($data);
     }
 
     /**
@@ -47,9 +62,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->first();
+
+        if (! $post) {
+            abort(404);
+        }
+
+        return view('admin.posts.show', compact('post'));
     }
 
     /**

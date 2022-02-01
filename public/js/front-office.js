@@ -13553,7 +13553,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/eleonorapotente/Desktop/laravel-boolpress/resources/js/front-office.js */"./resources/js/front-office.js");
+module.exports = __webpack_require__(/*! /Users/eleonora/Desktop/boolean/Classe 45/laravel-boolpress/resources/js/front-office.js */"./resources/js/front-office.js");
 
 
 /***/ })
