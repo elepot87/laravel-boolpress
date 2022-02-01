@@ -8,7 +8,14 @@
         <a href="{{route('admin.posts.create')}}">Create a new one</a>
     </p>
     @else
-    <table class="table">
+
+    @if(session('delete'))
+    <div class="alert alert-success">
+        <strong>{{session('delete')}}</strong> eliminato con successo.
+    </div>
+    @endif
+
+    <table class="table my-3">
         <thead>
             <tr>
                 <th>ID</th>
@@ -27,7 +34,13 @@
                 <td>
                     <a href="{{route('admin.posts.edit', $post->id)}}">EDIT</a>
                 </td>
-                <td>DELETE</td>
+                <td>
+                    <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

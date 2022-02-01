@@ -17,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        dump($posts);
+        // dump($posts);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -162,7 +162,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Prende il record con l'id selezionato
+        $post = Post::find($id);
+        // Cancella il record selezionato
+        $post->delete();
+        // Redirect verso pagina gallery
+        return redirect()->route('admin.posts.index')->with('delete', $post->title);
     }
 
     // Validation rules
