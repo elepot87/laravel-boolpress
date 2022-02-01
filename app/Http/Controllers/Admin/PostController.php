@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Post;
 
 class PostController extends Controller
@@ -54,6 +55,26 @@ class PostController extends Controller
         
         $data = $request->all();
         dump($data);
+
+        // Crea nuovo post
+        $new_post = new Post();
+
+        // Generazione slug univoca
+        $slug = Str::slug($data['title'], '-');
+        $count = 1;
+        // Eseguo il ciclo se ho trovato un post con lo slug attuale
+        while(Post::where('slug', $slug)->first()) {
+            // Generare nuovo slug con contatore
+            $slug .= '-' . $count;
+            $count++;
+        }
+        $data['slug'] = $slug;
+
+        $new_post->fill($data); //Fare fillable nel model
+        $new_post->save(); //Salvo a db
+
+        //  redirect verso pagina dettaglio
+        return redirect()->route('admin.posts.show', $new_post->slug);
     }
 
     /**
