@@ -42,16 +42,18 @@ class PostController extends Controller
         // VALIDAZIONE
         // 1 parametro: set regole di validazione
         // 2 parametro: customizzare messaggio di errore (se si vuole)
-        $request->validate(
-            [
-            'title' => 'required|max:255',
-            'content' => 'required',
-            ], 
-            [
-            'required' => 'Remember to write the :attribute',
-            'max' => 'Max :max characters allowed for the :attribute',
-            ]
-        );
+        // $request->validate(
+        //     [
+        //     'title' => 'required|max:255',
+        //     'content' => 'required',
+        //     ], 
+        //     [
+        //     'required' => 'Remember to write the :attribute',
+        //     'max' => 'Max :max characters allowed for the :attribute',
+        //     ]
+        // );
+
+        $request->validate($this->validation_rules(), $this->validation_messages());
         
         $data = $request->all();
         dump($data);
@@ -102,7 +104,13 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+
+        if(! $post) {
+            abort(404);
+        }
+
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -114,7 +122,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate($this->validation_rules(), $this->validation_messages());
     }
 
     /**
@@ -126,5 +134,21 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Validation rules
+
+    private function validation_rules() {
+        return [
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ];
+    }
+
+    private function validation_messages() {
+        return [
+            'required' => 'Remember to write the :attribute',
+            'max' => 'Max :max characters allowed for the :attribute',
+        ];
     }
 }
