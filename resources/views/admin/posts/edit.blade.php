@@ -20,7 +20,7 @@
         <div class="mb-3">
             <label for="content" class="form-label">Content*</label>
             <textarea class="form-control" name="content" id="content" cols="30" rows="10"
-                value="{{ old('content', $post->content) }}"></textarea>
+                value="{{ old('content', $post->content) }}">{{$post->content}}</textarea>
             <!-- Visualizzazione mirata per l'errore -->
             @error('content')
             <div class="text-danger">{{$message}}</div>

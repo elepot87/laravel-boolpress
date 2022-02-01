@@ -122,7 +122,36 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Validazione
         $request->validate($this->validation_rules(), $this->validation_messages());
+        
+        // Colleziono dati che arrivano dal form
+        $data = $request->all();
+        
+        // 1.Ottenere il record da aggiornare 
+        $post = Post::find($id);
+        
+        // 2.Update dello slug SOLO se il titolo è cambiato
+        if($data['title'] != $post->title) {
+            $slug = Str::slug($data['title'], '-');
+            $count = 1;
+            $base_slug = $slug;
+        // Eseguo il ciclo se ho trovato un post con lo slug attuale
+            while(Post::where('slug', $slug)->first()) {
+            // Generare nuovo slug con contatore
+                $slug .= '-' . $count;
+                $count++;
+            }
+                $data['slug'] = $slug;
+            }
+            else {
+                $data['slug'] = $post->slug;
+            }
+
+            $post->update();
+
+         //redirect verso pagina dettaglio aggiornato
+        return redirect()->route('admin.posts.show', $post->slug);
     }
 
     /**
