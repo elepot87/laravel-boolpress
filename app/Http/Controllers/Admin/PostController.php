@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -28,7 +29,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -176,13 +179,15 @@ class PostController extends Controller
         return [
             'title' => 'required|max:255',
             'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id', //Controllo se category id esiste nella tabella categories
         ];
     }
 
     private function validation_messages() {
         return [
             'required' => 'Remember to write the :attribute',
-            'max' => 'Max :max characters allowed for the :attribute',
+            'max' => 'Max :max characters allowed for the :attribute', 
+            'category_id.exists' => 'The selected category doesn\'t exist.',
         ];
     }
 }
