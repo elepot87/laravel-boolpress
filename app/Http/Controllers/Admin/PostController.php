@@ -155,7 +155,7 @@ class PostController extends Controller
                 $data['slug'] = $post->slug;
             }
 
-            $post->update();
+            $post->update($data);
 
          //redirect verso pagina dettaglio aggiornato
         return redirect()->route('admin.posts.show', $post->slug);
