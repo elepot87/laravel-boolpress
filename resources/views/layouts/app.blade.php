@@ -54,7 +54,6 @@
                             @endif
                             " href="{{ route('admin.posts.create') }}">Create</a>
                         </li>
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
