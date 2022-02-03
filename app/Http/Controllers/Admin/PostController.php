@@ -92,6 +92,8 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)->first();
 
+        dump($post->category); //Ricorda che è istanza singola, un oggetto
+
         if (! $post) {
             abort(404);
         }
