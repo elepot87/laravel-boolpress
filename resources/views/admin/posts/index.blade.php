@@ -76,7 +76,8 @@
                     <ul>
                         @foreach ($tag->posts as $post)
                         <li>
-                            <a href="{{ route('admin.posts.show', $post->slug) }}">{{ $post->title }}</a>
+                            <a href="{{ route('admin.posts.show', $post->slug) }}">
+                                {{ $post->title }}</a>
                         </li>
                         @endforeach
                     </ul>
