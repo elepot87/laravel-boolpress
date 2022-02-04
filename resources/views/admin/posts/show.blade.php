@@ -19,7 +19,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            {{!! $post->content !!}}
+            {!! $post->content !!}
         </div>
         <div class="col-md-6">
             image here
@@ -27,7 +27,7 @@
     </div>
 
     @if (! $post->tags->isEmpty())
-    <h5>Tags</h5>
+    <h5 class="mt-3">Tags</h5>
 
     @foreach ($post->tags as $tag)
     <span class="badge badge-primary">
@@ -35,7 +35,7 @@
     </span>
     @endforeach
     @else
-    <p>No tags for this post.</p>
+    <p class="mt-3"> <strong>No tags for this post.</strong></p>
     @endif
 
 </div>

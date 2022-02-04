@@ -83,7 +83,7 @@ class PostController extends Controller
         $new_post->fill($data); //Fare fillable nel model
         $new_post->save(); //Salvo a db
 
-        // Relazione di post creato con id dei tags
+        // Salvo in tabella pivot relazione del post creato con id dei tags
         if(array_key_exists('tags', $data)) {
             $new_post->tags()->attach($data['tags']);
         }
