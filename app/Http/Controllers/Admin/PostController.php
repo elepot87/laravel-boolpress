@@ -170,7 +170,7 @@ class PostController extends Controller
 
             // Update relazioni pivot tra post aggiornato e tags
             if(array_key_exists('tags', $data)) {
-                // update tags (rows in pivot): aggiunta di nuovi id, rimozione di id
+                // update tags (rows in pivot): aggiunta di nuovi id, rimozione di id, cambio di id
                 $post->tags()->sync($data['tags']);
             } else {
                 // nessun checkbox per tags selezionato nella form, quindi pulizia
