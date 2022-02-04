@@ -27,24 +27,46 @@
             @enderror
         </div>
 
-        {{-- Categories --}}
+        <!-- Categories  -->
         <div class="mb-3">
             <label for="category_id">
                 Category
             </label>
-            <select 
-            class="form-control"
-            name="category_id" id="category_id">
+            <select class="form-control" name="category_id" id="category_id">
                 <option value="">Uncategorized</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"
-                        @if ($category->id == old('category_id', $post->category_id)) selected @endif>
-                        {{ $category->name }}
-                    </option>
+                <option value="{{ $category->id }}" @if ($category->id == old('category_id', $post->category_id))
+                    selected @endif>
+                    {{ $category->name }}
+                </option>
                 @endforeach
             </select>
-            {{-- Visualizzazione mirata per l'errore --}}
+            <!-- Visualizzazione mirata per l'errore -->
             @error('category_id')
+            <div class="text-danger">{{$message}}</div>
+            @enderror
+        </div>
+
+        <!-- Tags -->
+        <div class="mb-3">
+            <h4>Tags</h4>
+
+            @foreach ($tags as $tag)
+            <span class="d-inline-block mr-4">
+                <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}">
+                @if($errors->any() && in_array($tag->id, old('tags')))
+                checked
+                @elseif(!$errors->any() && $post->tags->contains($tag->id))
+                checked
+                @endif
+
+                <label for="tag{{ $loop->iteration }}">
+                    {{ $tag->name }}
+                </label>
+            </span>
+            @endforeach
+            <!-- Visualizzazione mirata per l'errore -->
+            @error('tags')
             <div class="text-danger">{{$message}}</div>
             @enderror
         </div>

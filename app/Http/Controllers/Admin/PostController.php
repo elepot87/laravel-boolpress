@@ -19,8 +19,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+
+        $tags = Tag::all();
+    
         // dump($posts);
-        return view('admin.posts.index', compact('posts'));
+        return view('admin.posts.index', compact('posts', 'tags'));
     }
 
     /**
@@ -80,6 +83,11 @@ class PostController extends Controller
         $new_post->fill($data); //Fare fillable nel model
         $new_post->save(); //Salvo a db
 
+        // Relazione di post creato con id dei tags
+        if(array_key_exists('tags', $data)) {
+            $new_post->tags()->attach($data['tags']);
+        }
+
         //  redirect verso pagina dettaglio
         return redirect()->route('admin.posts.show', $new_post->slug);
     }
@@ -114,12 +122,13 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $categories = Category::all();
+        $tags = Tag::all();
 
         if(! $post) {
             abort(404);
         }
 
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -159,6 +168,15 @@ class PostController extends Controller
 
             $post->update($data);
 
+            // Update relazioni pivot tra post aggiornato e tags
+            if(array_key_exists('tags', $data)) {
+                // update tags (rows in pivot): aggiunta di nuovi id, rimozione di id
+                $post->tags()->sync($data['tags']);
+            } else {
+                // nessun checkbox per tags selezionato nella form, quindi pulizia
+                $post->tags()->detach();
+            }
+
          //redirect verso pagina dettaglio aggiornato
         return redirect()->route('admin.posts.show', $post->slug);
     }
@@ -175,6 +193,10 @@ class PostController extends Controller
         $post = Post::find($id);
         // Cancella il record selezionato
         $post->delete();
+
+        // Cancella anche relazione nella tabella pivot per non avere record orfani (se non avessimo onDelete nella migration)
+        // $post->tags()->detach();
+        
         // Redirect verso pagina gallery
         return redirect()->route('admin.posts.index')->with('delete', $post->title);
     }
@@ -186,6 +208,7 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id', //Controllo se category id esiste nella tabella categories
+            'tags'=> 'nullable|exists:tags,id'
         ];
     }
 
@@ -194,6 +217,7 @@ class PostController extends Controller
             'required' => 'Remember to write the :attribute',
             'max' => 'Max :max characters allowed for the :attribute', 
             'category_id.exists' => 'The selected category doesn\'t exist.',
+            'tag_id.exists' => 'The selected tag doesn\'t exist.'
         ];
     }
 }

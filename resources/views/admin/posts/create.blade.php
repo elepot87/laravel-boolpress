@@ -37,7 +37,7 @@
             @enderror
         </div>
 
-        <!-- {{-- Categories --}} -->
+        <!-- Categories -->
         <div class="mb-3">
             <label for="category_id">
                 Category
@@ -50,7 +50,7 @@
                 </option>
                 @endforeach
             </select>
-            {{-- Visualizzazione mirata per l'errore --}}
+            <!-- Visualizzazione mirata per l'errore -->
             @error('category_id')
             <div class="text-danger">{{$message}}</div>
             @enderror
@@ -63,12 +63,17 @@
             @foreach ($tags as $tag)
             <span class="d-inline-block mr-4">
                 <input type="checkbox" name="tags[]" id="tag{{ $loop->iteration }}" value="{{ $tag->id }}">
+                @if(in_array($tag->id, old('tags', []))) checked @endif
 
                 <label for="tag{{ $loop->iteration }}">
                     {{ $tag->name }}
                 </label>
             </span>
             @endforeach
+            <!-- Visualizzazione mirata per l'errore -->
+            @error('tags')
+            <div class="text-danger">{{$message}}</div>
+            @enderror
         </div>
 
 
