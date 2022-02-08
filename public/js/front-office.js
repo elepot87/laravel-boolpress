@@ -1930,6 +1930,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -1949,6 +1951,11 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (response) {
         _this.posts = response.data;
       });
+    },
+    getExcerpt: function getExcerpt(text, maxLength) {
+      if (text.length > maxLength) {
+        return text.substring(0, 100) + "...";
+      }
     }
   }
 });
@@ -3103,7 +3110,11 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("p", { staticClass: "psot-content" }, [
-                    _vm._v(_vm._s(post.content)),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.getExcerpt(post.content, 100)) +
+                        "\n                "
+                    ),
                   ]),
                 ]
               )

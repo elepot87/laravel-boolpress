@@ -10,7 +10,9 @@
                 >
                     <h2>{{ post.title }}</h2>
                     <div class="mb-4 date">{{ post.created_at }}</div>
-                    <p class="psot-content">{{ post.content }}</p>
+                    <p class="psot-content">
+                        {{ getExcerpt(post.content, 100) }}
+                    </p>
                 </article>
             </div>
             <div class="loader" v-else>Loading...</div>
@@ -37,6 +39,11 @@ export default {
             axios.get("http://127.0.0.1:8000/api/posts").then((response) => {
                 this.posts = response.data;
             });
+        },
+        getExcerpt(text, maxLength) {
+            if (text.length > maxLength) {
+                return text.substring(0, 100) + "...";
+            }
         },
     },
 };
