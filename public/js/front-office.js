@@ -1936,6 +1936,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -3118,32 +3132,64 @@ var render = function () {
         ? _c(
             "div",
             { staticClass: "container-posts" },
-            _vm._l(_vm.posts, function (post) {
-              return _c(
-                "article",
-                { key: "post-" + post.id, staticClass: "mb-4" },
-                [
-                  _c("h2", [_vm._v(_vm._s(post.title))]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "mb-4 date" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.formatDate(post.created_at)) +
-                        "\n                "
-                    ),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "psot-content" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.getExcerpt(post.content, 100)) +
-                        "\n                "
-                    ),
-                  ]),
-                ]
-              )
-            }),
-            0
+            [
+              _vm._l(_vm.posts, function (post) {
+                return _c(
+                  "article",
+                  { key: "post-" + post.id, staticClass: "mb-4" },
+                  [
+                    _c("h2", [_vm._v(_vm._s(post.title))]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-4 date" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.formatDate(post.created_at)) +
+                          "\n                "
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "psot-content" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.getExcerpt(post.content, 100)) +
+                          "\n                "
+                      ),
+                    ]),
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary mr-4",
+                  attrs: { disabled: _vm.pagination.current === 1 },
+                  on: {
+                    click: function ($event) {
+                      return _vm.getPosts(_vm.pagination.current - 1)
+                    },
+                  },
+                },
+                [_vm._v("\n                Prev\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: {
+                    disabled: _vm.pagination.current === _vm.pagination.last,
+                  },
+                  on: {
+                    click: function ($event) {
+                      return _vm.getPosts(_vm.pagination.current + 1)
+                    },
+                  },
+                },
+                [_vm._v("\n                Next\n            ")]
+              ),
+            ],
+            2
           )
         : _c("div", { staticClass: "loader" }, [_vm._v("Loading...")]),
     ]),

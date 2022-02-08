@@ -18,6 +18,20 @@
                 </article>
 
                 <!-- Paginazione -->
+                <button
+                    class="btn btn-primary mr-4"
+                    :disabled="pagination.current === 1"
+                    @click="getPosts(pagination.current - 1)"
+                >
+                    Prev
+                </button>
+                <button
+                    class="btn btn-primary"
+                    :disabled="pagination.current === pagination.last"
+                    @click="getPosts(pagination.current + 1)"
+                >
+                    Next
+                </button>
             </div>
             <div class="loader" v-else>Loading...</div>
         </div>
