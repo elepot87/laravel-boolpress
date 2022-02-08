@@ -24,7 +24,9 @@ export default {
     },
     methods: {
         getPosts() {
-            console.log("axios call here");
+            axios.get("http://127.0.0.1:8000/api/posts").then((response) => {
+                this.posts = response.data;
+            });
         },
     },
 };

@@ -1934,7 +1934,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPosts: function getPosts() {
-      console.log("axios call here");
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (response) {
+        _this.posts = response.data;
+      });
     }
   }
 });
