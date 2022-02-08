@@ -18,20 +18,35 @@
                 </article>
 
                 <!-- Paginazione -->
-                <button
-                    class="btn btn-primary mr-4"
-                    :disabled="pagination.current === 1"
-                    @click="getPosts(pagination.current - 1)"
-                >
-                    Prev
-                </button>
-                <button
-                    class="btn btn-primary"
-                    :disabled="pagination.current === pagination.last"
-                    @click="getPosts(pagination.current + 1)"
-                >
-                    Next
-                </button>
+                <div class="pagination my-4">
+                    <button
+                        class="btn btn-primary mr-2"
+                        :disabled="pagination.current === 1"
+                        @click="getPosts(pagination.current - 1)"
+                    >
+                        Prev
+                    </button>
+                    <button
+                        class="btn mr-2"
+                        :class="
+                            pagination.current === i
+                                ? 'btn-primary'
+                                : 'btn-secondary'
+                        "
+                        v-for="i in pagination.last"
+                        :key="`page-${i}`"
+                        @click="getPosts(i)"
+                    >
+                        {{ i }}
+                    </button>
+                    <button
+                        class="btn btn-primary mr-2"
+                        :disabled="pagination.current === pagination.last"
+                        @click="getPosts(pagination.current + 1)"
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
             <div class="loader" v-else>Loading...</div>
         </div>
