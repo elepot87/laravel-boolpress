@@ -1934,13 +1934,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   components: {},
   data: function data() {
     return {
-      posts: null
+      posts: null,
+      pagination: null
     };
   },
   created: function created() {
@@ -1950,8 +1953,17 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts").then(function (response) {
-        _this.posts = response.data;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts?page=".concat(page)).then(function (response) {
+        //1. Senza paginazione
+        // this.posts = response.data;
+        // 2. Con paginazione
+        _this.posts = response.data.data; // Creo oggetto per la paginazione
+
+        _this.pagination = {
+          current: response.data.current_page,
+          last: response.data.last_page
+        };
       });
     },
     getExcerpt: function getExcerpt(text, maxLength) {

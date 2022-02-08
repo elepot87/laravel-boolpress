@@ -11,8 +11,12 @@ class PostController extends Controller
     // Post Archive
     public function index() {
 
-        $post = Post::all();
+        // tutti i post
+        // $post = Post::all();
 
-        return response()->json($post);
+        // con paginazione
+        $posts = Post::paginate(3);
+
+        return response()->json($posts);
     }
 }
