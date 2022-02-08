@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// url iniziano con /api/...
+
 // Test route API 
 
 Route::get('/test', function() {
     return 'hello world';
 }); 
+
+// Endpoint per le API
+Route::namespace('Api')->group(function() {
+    // Post archive
+    Route::get('/posts', 'PostController@index');
+});
