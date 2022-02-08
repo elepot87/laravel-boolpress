@@ -3073,22 +3073,19 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c("h1", { staticClass: "my-4" }, [_vm._v("Il nostro blog")]),
+      _vm._v(" "),
+      _vm.posts
+        ? _c("div", { staticClass: "container-posts" }, [
+            _vm._v("Post list here"),
+          ])
+        : _c("div", { staticClass: "loader" }, [_vm._v("Loading...")]),
+    ]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "container my-4" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("h1", [_vm._v("Il nostro blog")]),
-        ]),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="container my-4">
-            <div class="row">
-                <h1>Il nostro blog</h1>
-            </div>
+        <div class="container">
+            <h1 class="my-4">Il nostro blog</h1>
+            <div class="container-posts" v-if="posts">Post list here</div>
+            <div class="loader" v-else>Loading...</div>
         </div>
     </div>
 </template>
