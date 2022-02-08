@@ -16,6 +16,8 @@
                         {{ getExcerpt(post.content, 100) }}
                     </p>
                 </article>
+
+                <!-- Paginazione -->
             </div>
             <div class="loader" v-else>Loading...</div>
         </div>
@@ -31,16 +33,28 @@ export default {
     data() {
         return {
             posts: null,
+            pagination: null,
         };
     },
     created() {
         this.getPosts();
     },
     methods: {
-        getPosts() {
-            axios.get("http://127.0.0.1:8000/api/posts").then((response) => {
-                this.posts = response.data;
-            });
+        getPosts(page = 1) {
+            axios
+                .get(`http://127.0.0.1:8000/api/posts?page=${page}`)
+                .then((response) => {
+                    //1. Senza paginazione
+                    // this.posts = response.data;
+
+                    // 2. Con paginazione
+                    this.posts = response.data.data;
+                    // Creo oggetto per la paginazione
+                    this.pagination = {
+                        current: response.data.current_page,
+                        last: response.data.last_page,
+                    };
+                });
         },
         getExcerpt(text, maxLength) {
             if (text.length > maxLength) {
