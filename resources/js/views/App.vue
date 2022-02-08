@@ -9,7 +9,9 @@
                     :key="`post-${post.id}`"
                 >
                     <h2>{{ post.title }}</h2>
-                    <div class="mb-4 date">{{ post.created_at }}</div>
+                    <div class="mb-4 date">
+                        {{ formatDate(post.created_at) }}
+                    </div>
                     <p class="psot-content">
                         {{ getExcerpt(post.content, 100) }}
                     </p>
@@ -42,8 +44,16 @@ export default {
         },
         getExcerpt(text, maxLength) {
             if (text.length > maxLength) {
-                return text.substring(0, 100) + "...";
+                return text.substring(0, maxLength) + "...";
             }
+        },
+        formatDate(postDate) {
+            const date = new Date(postDate);
+            console.log(date);
+
+            const formatted = new Intl.DateTimeFormat("it-IT").format();
+
+            return formatted;
         },
     },
 };
