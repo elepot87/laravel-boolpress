@@ -1,8 +1,18 @@
 <template>
     <div>
         <div class="container">
-            <h1 class="my-4">Il nostro blog</h1>
-            <div class="container-posts" v-if="posts">Post list here</div>
+            <h1 class="my-5">Il nostro blog</h1>
+            <div class="container-posts" v-if="posts">
+                <article
+                    class="mb-4"
+                    v-for="post in posts"
+                    :key="`post-${post.id}`"
+                >
+                    <h2>{{ post.title }}</h2>
+                    <div class="mb-4 date">{{ post.created_at }}</div>
+                    <p class="psot-content">{{ post.content }}</p>
+                </article>
+            </div>
             <div class="loader" v-else>Loading...</div>
         </div>
     </div>
