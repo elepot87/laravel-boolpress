@@ -2,6 +2,18 @@
     <section class="container">
         <div v-if="post">
             <h1>{{ post.title }}</h1>
+            <h3 class="my-3">Categoria: {{ post.category.name }}</h3>
+            <div class="mb-5">
+                Tags:
+                <span
+                    class="badge badge-primary mr-3"
+                    v-for="tag in post.tags"
+                    :key="`tag-${tag.id}`"
+                >
+                    {{ tag.name }}
+                </span>
+            </div>
+
             <p>{{ post.content }}</p>
         </div>
         <div v-else>Loading post</div>

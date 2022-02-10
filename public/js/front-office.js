@@ -2152,6 +2152,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Post Detail",
@@ -3730,6 +3742,33 @@ var render = function () {
     _vm.post
       ? _c("div", [
           _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+          _vm._v(" "),
+          _c("h3", { staticClass: "my-3" }, [
+            _vm._v("Categoria: " + _vm._s(_vm.post.category.name)),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mb-5" },
+            [
+              _vm._v("\n            Tags:\n            "),
+              _vm._l(_vm.post.tags, function (tag) {
+                return _c(
+                  "span",
+                  {
+                    key: "tag-" + tag.id,
+                    staticClass: "badge badge-primary mr-3",
+                  },
+                  [
+                    _vm._v(
+                      "\n                " + _vm._s(tag.name) + "\n            "
+                    ),
+                  ]
+                )
+              }),
+            ],
+            2
+          ),
           _vm._v(" "),
           _c("p", [_vm._v(_vm._s(_vm.post.content))]),
         ])
