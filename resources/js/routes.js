@@ -12,6 +12,7 @@ Vue.use(VueRouter);
 // DEFINIZIONE DELLE ROTTE
 const router = new VueRouter({
     mode: "history", //serve per evitare di avere in url l'#
+    linkExactActiveClass: "active",
     routes: [
         {
             path: "/",
