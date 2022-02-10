@@ -3,6 +3,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 // COMPONENTI PER ROTTA
+import Home from "./pages/Home.vue";
+import About from "./pages/About.vue";
 
 // ATTIVAZIONE ROUTER IN VUE.JS
 Vue.use(VueRouter);
@@ -15,6 +17,11 @@ const router = new VueRouter({
             path: "/",
             name: "home",
             component: Home,
+        },
+        {
+            path: "/about",
+            name: "about",
+            component: About,
         },
     ],
 });

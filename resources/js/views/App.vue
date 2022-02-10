@@ -2,7 +2,9 @@
     <div>
         <header>Header</header>
 
-        <main>componenti specifici</main>
+        <main>
+            <router-view></router-view>
+        </main>
     </div>
 </template>
 
