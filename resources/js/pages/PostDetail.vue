@@ -37,8 +37,14 @@ export default {
                     `http://127.0.0.1:8000/api/posts/${this.$route.params.slug}`
                 )
                 .then((res) => {
-                    console.log(res.data);
-                    this.post = res.data;
+                    // console.log(res.data);
+
+                    if (res.data.not_found) {
+                        // console.log("404");
+                        this.$router.push({ name: "not-found" });
+                    } else {
+                        this.post = res.data;
+                    }
                 })
                 .catch((err) => log.error(err));
         },

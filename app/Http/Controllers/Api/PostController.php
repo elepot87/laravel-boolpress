@@ -28,6 +28,10 @@ class PostController extends Controller
 
         // prendere post by slug con categorie e tags
          $post = Post::where('slug', $slug)->with('category', 'tags')->first();
+
+         if(! $post) {
+             $post['not_found'] = true;
+         }
             
         // ritorno dati in json
         return response()->json($post);
