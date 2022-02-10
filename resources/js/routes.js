@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 // COMPONENTI PER ROTTA
 import Home from "./pages/Home.vue";
 import About from "./pages/About.vue";
+import Blog from "./pages/Blog.vue";
 
 // ATTIVAZIONE ROUTER IN VUE.JS
 Vue.use(VueRouter);
@@ -12,7 +13,7 @@ Vue.use(VueRouter);
 // DEFINIZIONE DELLE ROTTE
 const router = new VueRouter({
     mode: "history", //serve per evitare di avere in url l'#
-    linkExactActiveClass: "active",
+    linkExactActiveClass: "active", //per settare classe esatta attiva
     routes: [
         {
             path: "/",
@@ -23,6 +24,11 @@ const router = new VueRouter({
             path: "/about",
             name: "about",
             component: About,
+        },
+        {
+            path: "/blog",
+            name: "blog",
+            component: Blog,
         },
     ],
 });
