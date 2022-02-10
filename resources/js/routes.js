@@ -18,3 +18,6 @@ const router = new VueRouter({
         },
     ],
 });
+
+// EXPORT ROTTE PER ESSERE USATE CON IMPORT IN ALTRI FILE
+export default router;
