@@ -3,16 +3,8 @@
         <div v-if="post">
             <h1>{{ post.title }}</h1>
             <h3 class="my-3">Categoria: {{ post.category.name }}</h3>
-            <div class="mb-5">
-                Tags:
-                <span
-                    class="badge badge-primary mr-3"
-                    v-for="tag in post.tags"
-                    :key="`tag-${tag.id}`"
-                >
-                    {{ tag.name }}
-                </span>
-            </div>
+
+            <Tags :list="post.tags" class="mb-5" />
 
             <p>{{ post.content }}</p>
         </div>
@@ -22,9 +14,13 @@
 
 <script>
 import axios from "axios";
+import Tags from "../components/Tags.vue";
 
 export default {
     name: "Post Detail",
+    components: {
+        Tags,
+    },
     data() {
         return {
             post: null,
