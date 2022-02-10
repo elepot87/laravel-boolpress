@@ -15,6 +15,14 @@
                     <p class="psot-content">
                         {{ getExcerpt(post.content, 100) }}
                     </p>
+                    <router-link
+                        :to="{
+                            name: 'post-detail',
+                            params: { slug: post.slug },
+                        }"
+                    >
+                        Read more
+                    </router-link>
                 </article>
 
                 <!-- Paginazione -->
