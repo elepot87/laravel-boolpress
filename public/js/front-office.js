@@ -2210,6 +2210,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3874,9 +3877,15 @@ var render = function () {
           [
             _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
             _vm._v(" "),
-            _c("h3", { staticClass: "my-3" }, [
-              _vm._v("Categoria: " + _vm._s(_vm.post.category.name)),
-            ]),
+            !_vm.post.category
+              ? _c("h3", { staticClass: "my-3" }, [
+                  _vm._v(
+                    "\n            Categoria: " +
+                      _vm._s(_vm.post.category.name) +
+                      "\n        "
+                  ),
+                ])
+              : _c("h3", [_vm._v("Non ci sono categorie per questo post")]),
             _vm._v(" "),
             _c("Tags", { staticClass: "mb-5", attrs: { list: _vm.post.tags } }),
             _vm._v(" "),

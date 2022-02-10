@@ -2,7 +2,10 @@
     <section class="container">
         <div v-if="post">
             <h1>{{ post.title }}</h1>
-            <h3 class="my-3">Categoria: {{ post.category.name }}</h3>
+            <h3 class="my-3" v-if="!post.category">
+                Categoria: {{ post.category.name }}
+            </h3>
+            <h3 v-else>Non ci sono categorie per questo post</h3>
 
             <Tags :list="post.tags" class="mb-5" />
 
