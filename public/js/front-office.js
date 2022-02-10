@@ -2140,14 +2140,42 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Post Detail"
+  name: "Post Detail",
+  data: function data() {
+    return {
+      post: null
+    };
+  },
+  created: function created() {
+    this.getPostDetail();
+  },
+  methods: {
+    getPostDetail: function getPostDetail() {
+      var _this = this;
+
+      // Get post from api
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://127.0.0.1:8000/api/posts/".concat(this.$route.params.slug)).then(function (res) {
+        console.log(res.data);
+        _this.post = res.data;
+      })["catch"](function (err) {
+        return log.error(err);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -3698,18 +3726,17 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "container" }, [
+    _vm.post
+      ? _c("div", [
+          _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.post.content))]),
+        ])
+      : _c("div", [_vm._v("Loading post")]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Post detail")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
