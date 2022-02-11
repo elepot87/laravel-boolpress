@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-5">{{$post->title}}</h1>
+    <h1 class="mb-5">{{ $post->title }}</h1>
+
+    <h4 class="mb-3">{{ $post->created_at->isoFormat('dddd DD/MM/YYYY') }}</h4>
+    <h4 class="mb-3">{{ $post->created_at->diffForHumans() }}</h4>
 
     <div class="mb-5">
         <div class="mb-3">
