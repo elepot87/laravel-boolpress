@@ -156,6 +156,17 @@ class PostController extends Controller
         
         // 1.Ottenere il record da aggiornare 
         $post = Post::find($id);
+
+        // AGGIUNTA / UPDATE DEL POST SE PRESENTE
+        if(array_key_exists('cover', $data)) {
+            // remove if cover already exists
+            if($post->cover) {
+                Storage::delete($post->cover);
+            }
+
+            $data['cover'] = Storage::put('posts-covers', $data['cover']);
+        }
+
         
         // 2.Update dello slug SOLO se il titolo è cambiato
         if($data['title'] != $post->title) {

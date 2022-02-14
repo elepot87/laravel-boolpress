@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="mb-5">Edit: {{$post->title}}</h1>
 
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
@@ -66,6 +66,19 @@
             @endforeach
             <!-- Visualizzazione mirata per l'errore -->
             @error('tags')
+            <div class="text-danger">{{$message}}</div>
+            @enderror
+        </div>
+
+        <!-- Image cover post -->
+        <div class="mb-4">
+            <label class="form-label" for="cover"> <strong>Post Image</strong></label>
+            @if($post->cover)
+            <img width="200" src="{{ asset('storage/' . $post->cover) }}" alt="{{ $post->title }}">
+            @endif
+            <input type="file" name="cover" id="cover" class="form-control-file">
+            <!-- Visualizzazione mirata per l'errore -->
+            @error('cover')
             <div class="text-danger">{{$message}}</div>
             @enderror
         </div>
