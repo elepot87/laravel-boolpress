@@ -9,6 +9,10 @@
 
             <Tags :list="post.tags" class="mb-5" />
 
+            <figure class="img-post" v-if="post.cover">
+                <img :src="post.cover" :alt="post.title" />
+            </figure>
+
             <p>{{ post.content }}</p>
         </div>
         <div v-else>Loading post</div>
@@ -55,4 +59,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.img-post img {
+    max-width: 400px;
+}
+</style>
