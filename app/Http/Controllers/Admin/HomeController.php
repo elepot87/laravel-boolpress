@@ -6,11 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Mail\SendWelcomeEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {
     //ADMIN HOMEPAGE CONFIG
     public function index() {
+
+        // Test invio mail - versione statica
+        Mail::to('account@mail.com')->send(new SendWelcomeEmail);
 
         // CARBON
         // $now = new Carbon();
