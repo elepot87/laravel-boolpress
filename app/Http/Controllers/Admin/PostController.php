@@ -210,6 +210,12 @@ class PostController extends Controller
     {
         // Prende il record con l'id selezionato
         $post = Post::find($id);
+
+        // check presenza cover
+        if($post->cover) {
+            Storage::delete($post->cover);
+        }
+
         // Cancella il record selezionato
         $post->delete();
 
