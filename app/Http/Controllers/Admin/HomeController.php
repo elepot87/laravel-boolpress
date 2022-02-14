@@ -10,13 +10,21 @@ use App\Mail\SendWelcomeEmail;
 use Illuminate\Support\Facades\Mail;
 
 
+
 class HomeController extends Controller
 {
     //ADMIN HOMEPAGE CONFIG
     public function index() {
 
-        // Test invio mail - versione statica
-        Mail::to('account@mail.com')->send(new SendWelcomeEmail);
+        //1. Test invio mail - versione statica
+        // Mail::to('account@mail.com')->send(new SendWelcomeEmail);
+
+        // 2. Test invio email con dati dinamici Auth
+        // Mail::to(Auth::user()->email)->send(new SendWelcomeEmail);
+
+        // 3. Test invio email con dati dinamici con Auth e dati a classe
+        Mail::to(Auth::user()->email)->send(new SendWelcomeEmail(Auth::user()->name));
+
 
         // CARBON
         // $now = new Carbon();
