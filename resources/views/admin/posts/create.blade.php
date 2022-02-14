@@ -15,7 +15,7 @@
     </div>
     @endif -->
 
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -76,6 +76,15 @@
             @enderror
         </div>
 
+        <!-- Image cover post -->
+        <div class="mb-4">
+            <label class="form-label" for="cover"> <strong>Post Image</strong></label>
+            <input type="file" name="cover" id="cover" class="form-control-file">
+            <!-- Visualizzazione mirata per l'errore -->
+            @error('cover')
+            <div class="text-danger">{{$message}}</div>
+            @enderror
+        </div>
 
         <button class="btn btn-primary" type="subit">Create</button>
     </form>
