@@ -15,7 +15,7 @@ class PostController extends Controller
         // $post = Post::all();
 
         // con paginazione
-        $posts = Post::paginate(3);
+        $posts = Post::orderBy('id', 'desc')->paginate(3);
 
         return response()->json($posts);
     }
