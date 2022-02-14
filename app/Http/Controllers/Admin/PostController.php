@@ -64,7 +64,7 @@ class PostController extends Controller
         $request->validate($this->validation_rules(), $this->validation_messages());
         
         $data = $request->all();
-        dump($data);
+        dd($data);
 
         // Crea nuovo post
         $new_post = new Post();
@@ -208,7 +208,8 @@ class PostController extends Controller
             'title' => 'required|max:255',
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id', //Controllo se category id esiste nella tabella categories
-            'tags'=> 'nullable|exists:tags,id'
+            'tags'=> 'nullable|exists:tags,id',
+            'cover' => 'nullable|file|mimes:jpeg, jpg, png',
         ];
     }
 
